@@ -4,7 +4,7 @@ export function configureFakeBackend() {
     let users = [
         { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
         { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
-];
+    ];
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
         const authHeader = opts.headers['Authorization'];
@@ -58,15 +58,15 @@ export function configureFakeBackend() {
                 // private helper functions
 
                 function ok(body) {
-                    resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body))})
+                    resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body)) })
                 }
 
                 function unauthorised() {
-                    resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'Unauthorised' }))})
+                    resolve({ status: 401, text: () => Promise.resolve(JSON.stringify({ message: 'Unauthorised' })) })
                 }
 
                 function error(message) {
-                    resolve({ status: 400, text: () => Promise.resolve(JSON.stringify({ message }))})
+                    resolve({ status: 400, text: () => Promise.resolve(JSON.stringify({ message })) })
                 }
             }, 500);
         });
